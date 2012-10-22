@@ -1,10 +1,10 @@
 var config = require('./config'),
     path   = require('path');
 
-// Server variables
-var server = require(path.join(config.appURI, 'server')),
+// app variables
+var app = require(path.join(config.appURI, 'app')),
     http   = require('http');
 
-http.createServer(server).listen(server.get('port'), function(){
-    console.log("Express server listening on port " + server.get('port'));
+http.createServer(app).listen(app.get('port'), function(){
+    console.log("Express app listening on port " + app.get('port'));
 });
