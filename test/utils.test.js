@@ -15,7 +15,7 @@ describe('Utils', function() {
     });
 
     after(function() {
-        rimraf.sync(mockDir);
+        rimraf.sync(path.join(__dirname, mockDirName));
     });
 
     describe('#getModulesSync', function() {
