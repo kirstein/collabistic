@@ -1,16 +1,18 @@
 {
-  "name": "application-name",
+  "name": "Collabistic",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app"
   },
+  "devDependencies": {
+    "mocha": "~1.6.0"
+  },
   "dependencies": {
     "express": "3.0.0rc5",
     "jade": "*",
-    "less-middleware": "*",
-    "mocha": "~1.6.0",
     "rimraf": "~2.0.2",
-    "mkdirp": "~0.3.4"
+    "mkdirp": "~0.3.4",
+    "less-middleware": "~0.1.8"
   }
 }
