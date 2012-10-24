@@ -11,7 +11,9 @@ describe('module.utils', function() {
     var mockDirName     = 'mock',
         mockModuleName  = mockDirName;
         fileName        = 'index.js';
-        mockDir         = path.join(__dirname, mockDirName, mockModuleName);
+        mockDir         = path.join(__dirname, mockDirName, mockModuleName),
+        modulePath      = path.join(__dirname, mockDirName);
+
 
     before(function() {
         mkdirp.sync(mockDir);
@@ -29,8 +31,6 @@ describe('module.utils', function() {
             }).should.throw("module directory path not defined or does not exist");
         });
         it('should return mock module with no files set', function() {
-            var modulePath = path.join(__dirname, mockDirName);
-
             utils.getModulesSync(modulePath)
                  .should.be.an.instanceOf(Array)
                  .with.lengthOf(1)
@@ -38,14 +38,16 @@ describe('module.utils', function() {
         });
         it('should return mock module when files listing is set', function() {
 
+            utils.getModulesSync(modulePath, [ fileName ])
+                 .should.be.an.instanceOf(Array)
+                 .with.lengthOf(1)
+                 .and.include(mockDirName);
         });
 
         it('should return empty array when files listing is set but module does not match', function() {
-            var modulePath = path.join(__dirname, mockDirName);
-
             utils.getModulesSync(modulePath, [ 'does not exist' ])
                  .should.be.an.instanceOf(Array)
-                 .with.lengthOf(0)
-        })
+                 .with.lengthOf(0);
+        });
     });
 });
