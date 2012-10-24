@@ -45,6 +45,8 @@ describe('module.utils', function() {
         });
 
         it('should return empty array when files listing is set but module does not match', function() {
+            var modulePath = path.join(__dirname, mockDirName);
+
             utils.getModulesSync(modulePath, [ 'does not exist' ])
                  .should.be.an.instanceOf(Array)
                  .with.lengthOf(0);
