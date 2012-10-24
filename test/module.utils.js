@@ -1,4 +1,4 @@
-var libpath = process.env['COLLABISTIC_COV'] ? '../lib-cov' : '../lib',
+var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     should  = require('should'),
     rimraf  = require('rimraf'),
     path    = require('path'),
@@ -9,11 +9,10 @@ var utils   = require(path.join(libpath, 'module.utils'));
 
 describe('module.utils', function() {
     var mockDirName     = 'mock',
-        mockModuleName  = mockDirName;
-        fileName        = 'index.js';
+        mockModuleName  = mockDirName,
+        fileName        = 'index.js',
         mockDir         = path.join(__dirname, mockDirName, mockModuleName),
         modulePath      = path.join(__dirname, mockDirName);
-
 
     before(function() {
         mkdirp.sync(mockDir);
