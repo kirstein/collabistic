@@ -9,11 +9,8 @@ var injectRoute = require(path.join(libpath, 'api.injectRoute'))(mockModuleLocat
 
 describe('app.injectRoute', function() {
 
-    before(function(){
+    beforeEach(function(){
         app = express();
-        app.get('/already', function(req, res, next){
-            res.close();
-        });
     });
     it('should throw error when no routes are defined', function() {
         (function() {
@@ -69,6 +66,10 @@ describe('app.injectRoute', function() {
     });
 
     it('should not allow overriding old paths', function() {
+         app.get('/already', function(req, res, next){
+            res.close();
+        });
+
         (function() {
             injectRoute.inject([{
                 path: '/already',
@@ -84,6 +85,8 @@ describe('app.injectRoute', function() {
                 moduleLocation.should.equal(mockModuleLocation);
                 should.exist(res);
                 should.exist(req);
+
+                res.send(200, { test : true });
             }
 
             (function() {
@@ -96,7 +99,8 @@ describe('app.injectRoute', function() {
 
             request(app)
               .get(path)
-              .expect(201)
+              .expect(200)
+              .expect('Content-Type', /json/)
               .end(function(err, res){
                 if (err) throw err;
               });
@@ -108,6 +112,7 @@ describe('app.injectRoute', function() {
                 moduleLocation.should.equal(mockModuleLocation);
                 should.exist(res);
                 should.exist(req);
+                res.send(200);
             }
 
             (function() {
@@ -120,7 +125,7 @@ describe('app.injectRoute', function() {
 
             request(app)
               .post(path)
-              .expect(201)
+              .expect(200)
               .end(function(err, res){
                 if (err) throw err;
               });
@@ -132,6 +137,7 @@ describe('app.injectRoute', function() {
                 moduleLocation.should.equal(mockModuleLocation);
                 should.exist(res);
                 should.exist(req);
+                res.send(200);
             }
 
             (function() {
@@ -144,7 +150,7 @@ describe('app.injectRoute', function() {
 
             request(app)
               .put(path)
-              .expect(201)
+              .expect(200)
               .end(function(err, res){
                 if (err) throw err;
               });
