@@ -1,4 +1,4 @@
-var libpath = process.env['COLLABISTIC_COV'] ? '../lib-cov' : '../lib',
+var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     should  = require('should'),
     path    = require('path');
 
