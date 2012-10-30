@@ -2,9 +2,10 @@ R = dot
 MOCHA = ./node_modules/.bin/mocha --globals app
 COVERAGE_FILE = coverage.html
 G = ""
+TESTS = $(shell find test -name "*.test.js")
 
 test: test-env
-	$(MOCHA) -R $(R) -g $(G)
+	$(MOCHA) $(TESTS) -R $(R) -g $(G)
 
 coverage: lib-cov test-env
 	@COLLABISTIC_COV=1 $(MOCHA) -R html-cov > $(COVERAGE_FILE)

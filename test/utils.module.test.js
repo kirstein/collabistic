@@ -2,9 +2,9 @@ var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     should  = require('should'),
     path    = require('path');
 
-var utils   = require(path.join(libpath, 'module.utils'));
+var utils   = require(path.join(libpath, 'utils.module'));
 
-describe('module.utils', function() {
+describe('utils.module', function() {
     var mockDirName     = '.mock',
         mockModuleName  = 'mockModule',
         mockDir         = path.join(__dirname, mockDirName, mockModuleName),
