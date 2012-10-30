@@ -76,15 +76,22 @@ describe('utils.module', function() {
         });
 
         it('should return an array with one module object when moduleList is correct', function() {
-            utils.loadModules([mockDir])
+            var result = utils.loadModules([mockDir]);
+            result
                  .should.be.an.instanceOf(Array)
                  .with.lengthOf(1);
+
+            result[0]
+                .should.be.an.instanceOf(Object)
+                .and.have.ownProperty('location')
+                .and.have.ownProperty('module')
+                .and.have.ownProperty('manifest');
         });
 
          it('should throw an exception when loading fails', function() {
             (function() {
                 utils.loadModules(['this will fail']);
-            }).should.throw("Module loading failed!");
+            }).should.throw("Module loading failed! Error: No module location defined");
         });
     });
 });

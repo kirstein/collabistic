@@ -13,4 +13,7 @@ exports.publicURI = path.join(process.cwd(), "public");
 
 // Module management
 exports.modulesURI = path.join(exports.appURI, "modules");
-exports.moduleFiles = [ 'index.js', 'manifest.json' ];
+exports.module = {
+    files    : [ 'index.js', 'manifest.json' ],
+    manifest : 'manifest.json'
+};
