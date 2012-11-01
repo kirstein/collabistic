@@ -9,7 +9,10 @@ exports.baseURL = "http://#{exports.site}:#{exports.port}";
 exports.appURI = path.join(process.cwd(), "app");
 exports.routerURI = path.join(exports.appURI, "routes/router");
 exports.viewsURI  = path.join(exports.appURI, "views");
-exports.publicURI = path.join(process.cwd(), "public");
+exports.public = {
+    URI  : path.join(process.cwd(), "public"),
+    linkDir : 'modules'
+};
 
 // Module management
 exports.modulesURI = path.join(exports.appURI, "modules");
