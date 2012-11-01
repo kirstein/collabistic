@@ -84,14 +84,13 @@ describe('utils.module', function() {
             result[0]
                 .should.be.an.instanceOf(Object)
                 .and.have.ownProperty('location')
-                .and.have.ownProperty('module')
                 .and.have.ownProperty('manifest');
         });
 
          it('should throw an exception when loading fails', function() {
             (function() {
                 utils.loadModules(['this will fail']);
-            }).should.throw("Module loading failed! Error: No module location defined");
+            }).should.throw("Module loading failed! Error: Cannot find module 'this will fail/manifest.json'")
         });
     });
 });
