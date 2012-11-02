@@ -1,6 +1,9 @@
 var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     should  = require('should'),
-    path    = require('path');
+    path    = require('path'),
+    rimraf  = require('rimraf'),
+    config  = require(path.join(process.cwd(), "config")),
+    fs      = require('fs');
 
 var assetsPath  = path.join(libpath, 'api/assets');
 
@@ -54,14 +57,11 @@ describe('api/assets', function() {
     });
 
     describe ("#link([uri])", function() {
-        var rimraf = require('rimraf'),
-            config = require(path.join(process.cwd(), "config")),
-            fs     = require('fs');
 
         afterEach(function() {
             var moduleAssets = path.join(config.public.URI, config.public.linkDir);
             if (fs.existsSync(moduleAssets)) {
-                // rimraf.sync(moduleAssets);
+                rimraf.sync(moduleAssets);
             }
         });
         it ("should throw when no URI and no module manifest assets dir is defined", function() {
@@ -99,7 +99,43 @@ describe('api/assets', function() {
 
             var assets = require(assetsPath)(mockModule);
 
-            assets.link();
+            (function() {
+                assets.link();
+            }).should.not.throw();
+
+            fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
+              .should.be.true;
+        });
+    });
+
+    describe ('#unlink()', function() {
+        var moduleAssets = path.join(config.public.URI, config.public.linkDir),
+            moduleDir    = path.join(__dirname, '.mock', 'mockModule'),
+            mockModule  = {
+                name     : 'unlinkTest',
+                location : path.join(__dirname, '.mock', 'mockModule'),
+                manifest : {
+                    assets : 'assets'
+                }
+            };
+
+
+        var assets = require(assetsPath)(mockModule);
+
+
+        beforeEach(function() {
+            if (!fs.existsSync(moduleAssets)) {
+                fs.mkdirSync(moduleAssets);
+            }
+            fs.symlinkSync(moduleDir, path.join(moduleAssets, 'unlinkTest'));
+        });
+        it ("should remove linked models", function() {
+            (function() {
+                assets.unlink();
+            }).should.not.throw();
+
+            fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'unlinkTest'))
+              .should.be.false;
         });
     });
 });
