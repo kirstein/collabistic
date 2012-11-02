@@ -9,6 +9,7 @@ test: test-env
 
 coverage: lib-cov test-env
 	@COLLABISTIC_COV=1 $(MOCHA) -R html-cov > $(COVERAGE_FILE)
+	rm -rf lib-cov
 	echo 'Coverage complete. Check "$(COVERAGE_FILE)" for results'
 
 test-env:
