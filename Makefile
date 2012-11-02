@@ -15,6 +15,7 @@ test-unit: test-env
 	$(MOCHA) -R $(R) -g $(G)
 
 coverage: lib-cov test-env
+	echo "Running coverage using all tests..."
 	@COLLABISTIC_COV=1 $(MOCHA) $(TESTS) -R html-cov > $(COVERAGE_FILE)
 	rm -rf lib-cov
 	echo 'Coverage complete. Check "$(COVERAGE_FILE)" for results'
