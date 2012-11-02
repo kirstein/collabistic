@@ -16,6 +16,7 @@
     "rimraf": "~2.0.2",
     "mkdirp": "~0.3.4",
     "less-middleware": "~0.1.8",
-    "log4js": "~0.5.4"
+    "log4js": "~0.5.4",
+    "passport": "~0.1.12"
   }
 }
