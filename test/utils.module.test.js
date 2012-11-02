@@ -83,6 +83,7 @@ describe('utils.module', function() {
 
             result[0]
                 .should.be.an.instanceOf(Object)
+                .and.have.ownProperty('name')
                 .and.have.ownProperty('location')
                 .and.have.ownProperty('manifest');
         });

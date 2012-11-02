@@ -32,7 +32,7 @@ describe('api/assets', function() {
         }).should.not.throw();
     });
 
-    it ("should have link method", function() {
+    it ("should have link property", function() {
         var mockModule = {
             name     : 'name',
             location : 'location',
@@ -44,7 +44,7 @@ describe('api/assets', function() {
             .and.have.property('link');
     });
 
-    it ("should have unlink method", function() {
+    it ("should have unlink property", function() {
         var mockModule = {
             name     : 'name',
             location : 'location',
@@ -59,6 +59,7 @@ describe('api/assets', function() {
     describe ("#link([uri])", function() {
 
         afterEach(function() {
+            // If global assets folder for module assets does not exist, make a new one.
             var moduleAssets = path.join(config.public.URI, config.public.linkDir);
             if (fs.existsSync(moduleAssets)) {
                 rimraf.sync(moduleAssets);
@@ -103,6 +104,7 @@ describe('api/assets', function() {
                 assets.link();
             }).should.not.throw();
 
+            // Validate that the folder was actually created
             fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
               .should.be.true;
         });
