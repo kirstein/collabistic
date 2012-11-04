@@ -5,139 +5,88 @@ var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     config  = require(path.join(process.cwd(), "config")),
     fs      = require('fs');
 
-var assetsPath  = path.join(libpath, 'api/assets');
+var assetsPath = path.join(libpath, 'api/assets'),
+    mockModule = {
+        name: 'mockModule',
+        location: path.join(__dirname, '.mock', 'mockModule'),
+        manifest: {
+            assets: 'assets'
+        }
+    };
 
-describe('api/assets', function() {
-    it ("should throw when no module is defined", function() {
-        (function() {
-            require(assetsPath)();
-        }).should.throw("Module not defined");
-    });
+describe('api', function() {
+    describe('assets', function() {
+        it ("should have link property", function() {
+            require(assetsPath)(mockModule)
+                .should.be.an.instanceOf(Object)
+                .and.have.property('link');
+        });
 
-    it ("should throw when module definition is invalid", function () {
-        (function() {
-            require(assetsPath)({});
-        }).should.throw("Invalid module definition: TypeError: Cannot read property 'assets' of undefined");
-    });
+        it ("should have unlink property", function() {
+            require(assetsPath)(mockModule)
+                .should.be.an.instanceOf(Object)
+                .and.have.property('unlink');
+        });
 
-    it ("should not throw when module is defined", function() {
-        var mockModule = {
-            name     : 'name',
-            location : 'location',
-            manifest : {}
-        };
+        describe ("#link([uri])", function() {
 
-        (function() {
-            require(assetsPath)(mockModule);
-        }).should.not.throw();
-    });
-
-    it ("should have link property", function() {
-        var mockModule = {
-            name     : 'name',
-            location : 'location',
-            manifest : {}
-        };
-
-        require(assetsPath)(mockModule)
-            .should.be.an.instanceOf(Object)
-            .and.have.property('link');
-    });
-
-    it ("should have unlink property", function() {
-        var mockModule = {
-            name     : 'name',
-            location : 'location',
-            manifest : {}
-        };
-
-        require(assetsPath)(mockModule)
-            .should.be.an.instanceOf(Object)
-            .and.have.property('unlink');
-    });
-
-    describe ("#link([uri])", function() {
-
-        afterEach(function() {
-            // If global assets folder for module assets does not exist, make a new one.
             var moduleAssets = path.join(config.public.URI, config.public.linkDir);
-            if (fs.existsSync(moduleAssets)) {
-                rimraf.sync(moduleAssets);
-            }
-        });
-        it ("should throw when no URI and no module manifest assets dir is defined", function() {
-            var mockModule = {
-                name     : 'name',
-                location : 'location',
-                manifest : {}
-            };
-
-            (function() {
-                 require(assetsPath)(mockModule).link();
-            }).should.throw("No assets URI defined.");
-        });
-
-        it ("should throw when asset URI does not exist", function() {
-            var mockModule = {
-                name     : 'name',
-                location : 'location',
-                manifest : {}
-            };
-
-            (function() {
-                require(assetsPath)(mockModule).link('random location');
-            }).should.throw("Asset location does not exist");
-        });
-
-        it ("should create symlinks to public folder", function() {
-            var mockModule = {
-                name     : 'mockModule',
-                location : path.join(__dirname, '.mock', 'mockModule'),
-                manifest : {
-                    assets : 'assets'
+            afterEach(function() {
+                // If global assets folder for module assets does not exist, make a new one.
+                if (fs.existsSync(moduleAssets)) {
+                    rimraf.sync(moduleAssets);
                 }
-            };
+            });
+            it ("should throw when no URI and no module manifest assets dir is defined", function() {
+                (function() {
+                     require(assetsPath)({
+                        name: 'mockModule',
+                        location: path.join(__dirname, '.mock', 'mockModule'),
+                        manifest: {}
+                     }).link();
+                }).should.throw("No assets URI defined.");
+            });
+
+            it ("should throw when asset URI does not exist", function() {
+                (function() {
+                    require(assetsPath)(mockModule).link('random location');
+                }).should.throw("Asset location does not exist");
+            });
+
+            it ("should create symlinks to public folder", function() {
+                var assets = require(assetsPath)(mockModule);
+
+                (function() {
+                    assets.link();
+                }).should.not.throw();
+
+                // Validate that the folder was actually created
+                fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
+                  .should.be.true;
+            });
+        });
+
+        describe ('#unlink()', function() {
+            var moduleDir    = path.join(__dirname, '.mock', 'mockModule'),
+                moduleAssets = path.join(config.public.URI, config.public.linkDir);
+
 
             var assets = require(assetsPath)(mockModule);
 
-            (function() {
-                assets.link();
-            }).should.not.throw();
-
-            // Validate that the folder was actually created
-            fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
-              .should.be.true;
-        });
-    });
-
-    describe ('#unlink()', function() {
-        var moduleAssets = path.join(config.public.URI, config.public.linkDir),
-            moduleDir    = path.join(__dirname, '.mock', 'mockModule'),
-            mockModule  = {
-                name     : 'unlinkTest',
-                location : path.join(__dirname, '.mock', 'mockModule'),
-                manifest : {
-                    assets : 'assets'
+            beforeEach(function() {
+                if (!fs.existsSync(moduleAssets)) {
+                    fs.mkdirSync(moduleAssets);
                 }
-            };
+                fs.symlinkSync(moduleDir, path.join(moduleAssets, 'mockModule'));
+            });
+            it ("should remove linked models", function() {
+                (function() {
+                    assets.unlink();
+                }).should.not.throw();
 
-
-        var assets = require(assetsPath)(mockModule);
-
-
-        beforeEach(function() {
-            if (!fs.existsSync(moduleAssets)) {
-                fs.mkdirSync(moduleAssets);
-            }
-            fs.symlinkSync(moduleDir, path.join(moduleAssets, 'unlinkTest'));
-        });
-        it ("should remove linked models", function() {
-            (function() {
-                assets.unlink();
-            }).should.not.throw();
-
-            fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'unlinkTest'))
-              .should.be.false;
+                fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
+                  .should.be.false;
+            });
         });
     });
 });

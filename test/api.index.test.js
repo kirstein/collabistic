@@ -3,21 +3,29 @@ var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     path    = require('path'),
     apiLoc  = path.join(libpath, 'api');
 
+var mockModule = { name : true, location: true, manifest: true };
+
 describe('api', function() {
-    it('should throw an exception when no module is defined', function() {
+    it('should throw when no module is defined', function() {
         (function() {
             require(apiLoc)();
         }).should.throw("Module not defined");
     });
 
+    it ('should throw when module validation fails', function() {
+        (function() {
+            require(apiLoc)({});
+        }).should.throw("Invalid module definition");
+    });
+
     it('should return an object if module is defined', function() {
-        require(apiLoc)({})
+        require(apiLoc)(mockModule)
             .should.be.an.instanceOf(Object);
     });
 
     describe('API methods', function() {
         it('should have property injectRoute', function() {
-            require(apiLoc)({})
+            require(apiLoc)(mockModule)
                 .should.be.an.instanceOf(Object)
                 .and.have.property('injectRoutes');
         });

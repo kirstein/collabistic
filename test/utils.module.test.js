@@ -94,4 +94,31 @@ describe('utils.module', function() {
             }).should.throw("Module loading failed! Error: Cannot find module 'this will fail/manifest.json'")
         });
     });
+
+    describe("#isValid(module)", function() {
+        it ('{} should be false', function() {
+            utils.isValid({})
+                 .should.be.false;
+        });
+        it ('[] should be false', function() {
+            utils.isValid([])
+                 .should.be.false;
+        });
+        it ('{name : true, location : true} should be false', function() {
+            utils.isValid({ name : true, location: true})
+                 .should.be.false;
+        });
+        it ('{name : true} should be false', function() {
+            utils.isValid({ name : true})
+                 .should.be.false;
+        });
+        it ('no module should be false', function() {
+            utils.isValid()
+                 .should.be.false;
+        });
+        it ('{name : true, location : true, manifest : true} should be true', function() {
+            utils.isValid({ name : true, location: true, manifest : true})
+                 .should.be.true;
+        });
+    });
 });
