@@ -10,7 +10,9 @@ var assetsPath = path.join(libpath, 'api/assets'),
         name: 'mockModule',
         location: path.join(__dirname, '.mock', 'mockModule'),
         manifest: {
-            assets: 'assets'
+            assets: {
+                dir : 'assets'
+            }
         }
     };
 
