@@ -34,11 +34,36 @@ describe('api', function() {
                 rimraf.sync(assetsDir);
             });
 
-            it ('should throw when no initiators are passed', function() {
+            afterEach(function() {
+                 global.collabistic.initiators = []
+            });
+
+            it ('should throw when no initiators are being passed', function() {
                 (function() {
-                    init.add(asset);
-                }).should.not.throw()
-                  .and.be.instanceOf(Array).with.length(1);
+                    init.add()
+                }).should.throw('No initiators defined!');
+            });
+
+            it ('should throw when initiator is not linked', function() {
+                (function() {
+                    init.add('not linked')
+                }).should.throw('Initiator not in global assets dir. Has it been linked yet?');
+            });
+            it ('should add initiators when passed an array', function() {
+                (function() {
+                    init.add([asset, asset])
+                        .should.be.instanceOf(Array).with.length(2);
+                }).should.not.throw();
+
+                  global.collabistic.initiators
+                        .should.be.instanceOf(Array).with.length(2)
+                        .and.include('modules/mockModule/testasset.js');
+            });
+            it ('should add initiators', function() {
+                (function() {
+                    init.add(asset)
+                        .should.be.instanceOf(Array).with.length(1);
+                }).should.not.throw();
 
                   global.collabistic.initiators
                         .should.be.instanceOf(Array).with.length(1)
