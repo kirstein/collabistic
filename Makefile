@@ -1,14 +1,10 @@
 R = dot
-MOCHA = ./node_modules/.bin/mocha --globals app
+MOCHA = ./node_modules/.bin/mocha --globals collabistic
 COVERAGE_FILE = coverage.html
 G = ""
 TESTS = $(shell find test -name "*.test.js")
 
-test: test-unit test-modules
-
-test-modules: test-env
-	echo "Running module tests:"
-	$(MOCHA) $(shell find test/modules -name "*.test.js") -R $(R)
+test: test-unit
 
 test-unit: test-env
 	echo "Running unit tests:"
@@ -28,5 +24,5 @@ lib-cov:
 	@jscoverage --no-highlight lib lib-cov
 
 
-.PHONY: test test-modules coverage lib-gov test-unit
-.SILENT: test coverage lib-cov test-modules test-unit
+.PHONY: test coverage lib-gov test-unit
+.SILENT: test coverage lib-cov test-unit
