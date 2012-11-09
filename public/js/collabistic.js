@@ -1,8 +1,13 @@
-define(['marionette'], function(Marionette) {
+define(['marionette', 'underscore', 'main/log'], function(marionette, _, Logger) {
 
-    return {
-        mixins : [ 'mixin/router', 'mixin/test' ],
-        app    : new Marionette.Application()
-    };
+    var collabistic = {};
+
+    // Add logger
+    collabistic.logger = new Logger();
+
+    // Make new application
+    collabistic.app    = new Marionette.Application();
+
+    return collabistic;
 
 });

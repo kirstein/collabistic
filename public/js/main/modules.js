@@ -1,12 +1,15 @@
 // Boilerplate for module loader
-define(window._initiators, function() {
+define(['collabistic'].concat(window._initiators), function(collabistic) {
 
 
-    var modules = Array.prototype.slice.call(arguments);
+    var modules = Array.prototype.slice.call(arguments),
+        logger  = collabistic.logger;
 
-    if (window.config.log) {
-        console.log("Modules loaded:", modules.length);
-    }
+    // Remove fist item
+    modules.shift();
+
+    logger.info("Modules loaded:", modules.length);
+
     // Return an array of loaded modules
     return modules;
 });

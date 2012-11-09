@@ -26,6 +26,10 @@ requirejs.config({
 });
 
 require(['collabistic', 'main/mixins', 'main/modules'], function(collabistic) {
+    var app    = collabistic.app,
+        logger = collabistic.logger;
+
     // Start the app
-    collabistic.app.start();
+    app.start();
+    logger.info('Starting application');
 });
