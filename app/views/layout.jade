@@ -5,10 +5,10 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(type='text/javascript')
         window._initiators = "#{_initiators}".split(',')
+    script(src='js/config.js')
   body
     block content
 
-  script(data-main='js/main/config.js', src='js/lib/require-jquery.js')
-  script(src="js/main/app.js")
+  script(data-main='js/main/app', src='js/lib/require-jquery.js')
 
   block scripts
