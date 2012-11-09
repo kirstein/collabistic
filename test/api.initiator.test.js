@@ -57,7 +57,7 @@ describe('api', function() {
 
                   global.collabistic.initiators
                         .should.be.instanceOf(Array).with.length(2)
-                        .and.include('modules/mockModule/testasset.js');
+                        .and.include('modules/mockModule/testasset');
             });
             it ('should add initiators', function() {
                 (function() {
@@ -67,7 +67,7 @@ describe('api', function() {
 
                   global.collabistic.initiators
                         .should.be.instanceOf(Array).with.length(1)
-                        .and.include('modules/mockModule/testasset.js');
+                        .and.include('modules/mockModule/testasset');
             });
         });
     });
