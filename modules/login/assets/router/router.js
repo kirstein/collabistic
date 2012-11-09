@@ -9,8 +9,8 @@ define([ 'marionette', 'collabistic' ], function(Marionette, collabistic) {
         },
 
         initialize : function() {
-            this.on('all', function(evt) {
-                logger.info('Routing:', evt);
+            this.on('all', function() {
+                logger.debug('LoginModule > LoginRouter > event:', arguments);
             });
         },
         renderLogin : function() {

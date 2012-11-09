@@ -31,5 +31,5 @@ require(['collabistic', 'main/mixins', 'main/modules'], function(collabistic) {
 
     // Start the app
     app.start();
-    logger.info('Starting application');
+    logger.debug('Starting application');
 });

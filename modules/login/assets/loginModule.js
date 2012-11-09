@@ -18,6 +18,10 @@ define(['collabistic', './router/router'], function(collabistic, Router) {
         });
 
         // Events
+
+        LoginModule.on('all', function() {
+            logger.debug('LoginModule > event:', arguments);
+        });
         LoginModule.on('render:login', function() {
             logger.warn('should render login page');
             logger.error('error');
