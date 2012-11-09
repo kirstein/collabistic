@@ -3,9 +3,9 @@ requirejs.config({
     paths: {
 
         // Folder definitions
-        module : 'modules',
-        lib    : 'lib',
-        mixin  : 'mixin',
+        modules : '../modules',
+        lib     : 'lib',
+        mixin   : 'mixin',
 
         // Libraries
         backbone   : 'lib/backbone-min',
@@ -25,7 +25,7 @@ requirejs.config({
     }
 });
 
-require(['collabistic', 'main/mixins'], function(collabistic) {
+require(['collabistic', 'main/mixins', 'main/modules'], function(collabistic) {
     // Start the app
     collabistic.app.start();
 });

@@ -1,4 +1,8 @@
 window.config = {
-    mixins : [ 'mixin/router', 'mixin/test' ],
-    log    : true
+    mixins  : [ 'mixin/router' ],
+    log     : true,
+    history : {
+        pushState : true,
+        trigger   : true
+    }
 };
