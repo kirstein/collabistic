@@ -73,8 +73,7 @@ describe('middleware/pushStateFilter', function() {
             .expect(302)
             .end(function(err, res) {
                 res.statusCode.should.equal(302);
-                res.header.should.have.property('set-cookie')
-                   .and.include('redirect=' + path);
+                res.header.should.have.property('set-cookie');
                 done();
             });
     });
