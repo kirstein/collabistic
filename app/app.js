@@ -1,8 +1,13 @@
 var config = require('../config'),
-    path = require('path');
+    path   = require('path');
 
-var express = require('express'),
-    app     = express();
+var express  = require('express'),
+    Resource = require('express-resource'),
+    app      = express();
+
+// Add pushStateFilter
+var PushStateFilter = require(path.join(config.libURI, '/middleware/pushStateFilter'));
+app.use(new PushStateFilter(app, config.freepaths));
 
 app.configure(function() {
   app.set('port', config.port);
@@ -20,6 +25,7 @@ app.configure(function() {
     compress: true
   }));
   app.use(express.static(config.public.URI));
+
 });
 
 app.configure('development', function() {
