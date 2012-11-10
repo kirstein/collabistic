@@ -1,7 +1,6 @@
 define(['collabistic', './router/router'], function(collabistic, Router) {
 
     var app         = collabistic.app,
-        logger      = collabistic.logger,
         config      = window.config;
 
     return app.module('LoginModule', function(LoginModule, MyApp, Backbone, Marionette) {
@@ -13,18 +12,18 @@ define(['collabistic', './router/router'], function(collabistic, Router) {
 
         app.on('start', function() {
             if (config.log) {
-                logger.info('LoginModule loaded');
+                console.info('LoginModule loaded');
             }
         });
 
         // Events
 
         LoginModule.on('all', function() {
-            logger.debug('LoginModule > event:', arguments);
+            console.debug('LoginModule > event:', arguments);
         });
         LoginModule.on('render:login', function() {
-            logger.warn('should render login page');
-            logger.error('error');
+            console.warn('should render login page');
+            console.error('error');
         });
     });
 });

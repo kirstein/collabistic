@@ -2,13 +2,12 @@
 define(['collabistic'].concat(window._initiators), function(collabistic) {
 
 
-    var modules = Array.prototype.slice.call(arguments),
-        logger  = collabistic.logger;
+    var modules = Array.prototype.slice.call(arguments);
 
     // Remove fist item
     modules.shift();
 
-    logger.info("Modules loaded:", modules.length);
+    console.info("Modules loaded:", modules.length);
 
     // Return an array of loaded modules
     return modules;

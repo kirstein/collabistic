@@ -1,7 +1,10 @@
 define(function() {
-    var config = window.config,
-        log    = config.log,
-        Logger;
+
+    var config      = window.config,
+        log         = config.log,
+        realConsole = console;
+
+    console = {};
 
     function _formatDate() {
         var date  = new Date(),
@@ -36,38 +39,32 @@ define(function() {
         args = Array.prototype.slice.call(args);
         args.unshift(_formatDate());
 
-        return console[type].apply(console, args);
+        return realConsole[type].apply(realConsole, args);
     }
 
-    Logger = function() {
-        this.info('Logger started');
-    };
-
-    Logger.prototype.log = function() {
+    console.log = function() {
         if(log.level < 1) {
             return _log('log', arguments);
         }
     };
-    Logger.prototype.debug = function() {
+    console.debug = function() {
         if(log.level < 2) {
             return _log('debug', arguments);
         }
     };
-    Logger.prototype.info = function() {
+    console.info = function() {
         if(log.level < 3) {
             return _log('info', arguments);
         }
     };
-    Logger.prototype.warn = function() {
+    console.warn = function() {
         if(log.level < 4) {
             return _log('warn', arguments);
         }
     };
-    Logger.prototype.error = function() {
+    console.error = function() {
         if(log.level < 5) {
             return _log('error', arguments);
         }
     };
-
-    return Logger;
 });

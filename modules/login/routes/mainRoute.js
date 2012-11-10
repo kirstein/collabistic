@@ -1,7 +1,7 @@
 var MainRoute = function(api) {
     return api.injectRoutes({
         type: 'get',
-        path: '/login',
+        path: '/login/test',
         callback : this.login
     });
 };

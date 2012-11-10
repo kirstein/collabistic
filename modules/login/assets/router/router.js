@@ -1,6 +1,5 @@
 define([ 'marionette', 'collabistic' ], function(Marionette, collabistic) {
-    var app    = collabistic.app,
-        logger = collabistic.logger;
+    var app    = collabistic.app;
 
     return Marionette.AppRouter.extend({
         routes : {
@@ -10,7 +9,7 @@ define([ 'marionette', 'collabistic' ], function(Marionette, collabistic) {
 
         initialize : function() {
             this.on('all', function() {
-                logger.debug('LoginModule > LoginRouter > event:', arguments);
+                console.debug('LoginModule > LoginRouter > event:', arguments);
             });
         },
         renderLogin : function() {

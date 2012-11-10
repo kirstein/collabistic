@@ -11,7 +11,7 @@ window.config = {
         level      : 1,
         dateFormat : '[%H:%m:%s]'
     },
-    mixins      : [ 'mixin/router' ],
+    mixins      : [ 'mixin/router', 'mixin/pushState', 'mixin/console' ],
     history     : {
         pushState : true,
         trigger   : true

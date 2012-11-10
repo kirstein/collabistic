@@ -10,7 +10,10 @@ requirejs.config({
         // Libraries
         backbone   : 'lib/backbone-min',
         underscore : 'lib/lodash-min',
-        marionette : 'lib/backbone-marionette-min'
+        marionette : 'lib/backbone-marionette-min',
+
+        // Plugins
+        cookie     : 'lib/plugin/jquery-cookie'
     },
 
     shim : {
@@ -21,15 +24,18 @@ requirejs.config({
         marionette  : {
             deps : ['backbone'],
             exports: 'Backbone.Marionette'
+        },
+        cookie      : {
+            deps : ['jquery'],
+            exports : '$'
         }
     }
 });
 
 require(['collabistic', 'main/mixins', 'main/modules'], function(collabistic) {
-    var app    = collabistic.app,
-        logger = collabistic.logger;
+    var app    = collabistic.app;
 
     // Start the app
     app.start();
-    logger.debug('Starting application');
+    console.debug('Starting application');
 });

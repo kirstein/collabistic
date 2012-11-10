@@ -1,6 +1,5 @@
 define([ 'collabistic', 'backbone', 'jquery' ], function(collabistic, Backbone, $) {
     var app    = collabistic.app,
-        logger = collabistic.logger,
         config = window.config;
 
 
@@ -16,7 +15,7 @@ define([ 'collabistic', 'backbone', 'jquery' ], function(collabistic, Backbone, 
             conf.trigger = $el.data('silent') || true;
             conf.replace = $el.data('replace');
 
-            logger.info('routing through backbone:', href, JSON.stringify(conf));
+            console.info('routing through backbone:', href, JSON.stringify(conf));
 
             // Route through backbone
             Backbone.history.navigate(href, conf);
@@ -26,7 +25,7 @@ define([ 'collabistic', 'backbone', 'jquery' ], function(collabistic, Backbone, 
     // Start the backbone router
     function startHistory() {
         if (Backbone.history){
-            logger.info('starting backgone router with properties:', JSON.stringify(config.history));
+            console.info('starting backgone router with properties:', JSON.stringify(config.history));
             Backbone.history.start(config.history);
 
             // Trigger router start event
