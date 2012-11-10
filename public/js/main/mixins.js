@@ -26,11 +26,15 @@ var mixins = (function() {
 })();
 
 // Boilerplate for loading all the mixins.
-define([].concat(mixins), function() {
+require([].concat(mixins), function() {
     var mixins = Array.prototype.slice.call(arguments);
 
     console.info("Mixins loaded:", mixins.length);
 
     // Return the list of loaded mixins
     return mixins;
+}, function (err) {
+    var failedId = err.requireModules && err.requireModules[0];
+    alert(err.requireModules);
+    console.error('Mixin loading failed:', failedId);
 });

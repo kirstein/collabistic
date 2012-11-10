@@ -12,7 +12,8 @@ requirejs.config({
         marionette : 'lib/backbone-marionette-min',
 
         // Plugins
-        cookie     : 'lib/plugin/jquery-cookie'
+        cookie     : 'lib/plugin/jquery-cookie',
+        domReady   : 'lib/plugin/domReady'
     },
 
     shim : {
@@ -31,10 +32,13 @@ requirejs.config({
     }
 });
 
-require(['collabistic', 'main/mixins', 'main/modules'], function(collabistic) {
-    var app    = collabistic.app;
+require(['domReady','collabistic', 'main/mixins', 'main/modules'], function(domReady, collabistic) {
+    domReady(function(){
 
-    // Start the app
-    app.start();
-    console.debug('Starting application');
+        var app    = collabistic.app;
+
+        // Start the app
+        app.start();
+        console.debug('Starting application');
+    });
 });
