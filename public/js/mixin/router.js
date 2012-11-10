@@ -1,6 +1,6 @@
-define([ 'collabistic', 'backbone', 'jquery' ], function(collabistic, Backbone, $) {
+define([ 'module', 'collabistic', 'backbone', 'jquery' ], function(module, collabistic, Backbone, $) {
     var app    = collabistic.app,
-        config = window.config;
+        config = module.config();
 
 
     // Route anchor tags when data-rout is defined
@@ -25,7 +25,7 @@ define([ 'collabistic', 'backbone', 'jquery' ], function(collabistic, Backbone, 
     // Start the backbone router
     function startHistory() {
         if (Backbone.history){
-            console.info('starting backgone router with properties:', JSON.stringify(config.history));
+            console.info('starting backgone router with properties:', JSON.stringify(config));
             Backbone.history.start(config.history);
 
             // Trigger router start event
