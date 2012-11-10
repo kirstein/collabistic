@@ -1,6 +1,6 @@
-define([ 'collabistic', 'backbone', 'cookie'], function(collabistic, Backbone, $) {
+define([ 'module','collabistic', 'backbone', 'cookie'], function(module, collabistic, Backbone, $) {
     var app         = collabistic.app,
-        cookieName  = 'redirect';
+        cookieName  = module.config().cookieName;
 
     app.on('start', function() {
         var cookie = $.cookie(cookieName);

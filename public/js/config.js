@@ -7,13 +7,20 @@ window.config = {
     // 1. Log, almost everything...
     // 0. Everything!
     // All levels above are included. (lvl 3 = 3,4)
-    log : {
-        level      : 1,
-        dateFormat : '[%H:%m:%s]'
-    },
-    mixins      : [ 'mixin/router', 'mixin/pushState', 'mixin/console' ],
-    history     : {
-        pushState : true,
-        trigger   : true
+    mixins: [{
+        path: 'mixin/console',
+        config: {
+            dateFormat: '[%H:%m:%s]',
+            logLevel: 1
+        }
+    }, {
+        path: 'mixin/pushState',
+        config: {
+            cookieName: 'redirect'
+        }
+    }, 'mixin/router'],
+    history: {
+        pushState: true,
+        trigger: true
     }
 };

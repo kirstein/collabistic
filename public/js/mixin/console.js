@@ -1,14 +1,13 @@
-define(function() {
+define(['module'], function(module) {
 
-    var config      = window.config,
-        log         = config.log,
+    var level       = module.config().logLevel,
+        fmt         = module.config().dateFormat,
         realConsole = console;
 
     console = {};
 
     function _formatDate() {
-        var date  = new Date(),
-            fmt   = log.dateFormat;
+        var date  = new Date();
 
         function pad(value) {
             return(value.toString().length < 2) ? '0' + value : value;
@@ -43,27 +42,27 @@ define(function() {
     }
 
     console.log = function() {
-        if(log.level < 1) {
+        if(level < 1) {
             return _log('log', arguments);
         }
     };
     console.debug = function() {
-        if(log.level < 2) {
+        if(level < 2) {
             return _log('debug', arguments);
         }
     };
     console.info = function() {
-        if(log.level < 3) {
+        if(level < 3) {
             return _log('info', arguments);
         }
     };
     console.warn = function() {
-        if(log.level < 4) {
+        if(level < 4) {
             return _log('warn', arguments);
         }
     };
     console.error = function() {
-        if(log.level < 5) {
+        if(level < 5) {
             return _log('error', arguments);
         }
     };

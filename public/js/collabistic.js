@@ -1,5 +1,4 @@
 define(['marionette'], function(marionette) {
-
     var collabistic = {};
 
     // Make new application
