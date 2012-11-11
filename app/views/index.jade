@@ -1,5 +1,23 @@
 extends layout
 
+block head
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    script(type='text/javascript')
+        window._initiators = "#{_initiators}".split(',')
+
+block topnav
+    div.navbar.navbar-fixed-top.navbar-inverse
+      div.navbar-inner
+        div.container
+          a(data-collapse='collapse',data-target='.navbar-inverse-collapse').btn.btn-navbar
+          a.brand Collabistic
+          div.nav-collapse.collapse.navbar-inverse-collapse
+            ul.nav
+              li.active
+                a test
+
 block content
   h1= title
   p Welcome to #{title}

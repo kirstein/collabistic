@@ -11,7 +11,7 @@ exports.libURI    = path.join(process.cwd(), "lib");
 exports.appURI    = path.join(process.cwd(), "app");
 exports.routerURI = path.join(exports.appURI, "routes");
 exports.viewsURI  = path.join(exports.appURI, "views");
-exports.freepaths = [ '/','/js', '/modules', '/stylesheets' ],
+exports.freepaths = [ '/','/js', '/modules', '/css', '/img' ],
 exports.public    = {
     URI  : path.join(process.cwd(), "public"),
     linkDir : 'modules'

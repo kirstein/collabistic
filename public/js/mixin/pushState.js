@@ -1,4 +1,4 @@
-define([ 'module','collabistic', 'backbone', 'cookie'], function(module, collabistic, Backbone, $) {
+define([ 'module','collabistic', 'backbone', 'jquery.cookie'], function(module, collabistic, Backbone, $) {
     var app         = collabistic.app,
         cookieName  = module.config().cookieName;
 
