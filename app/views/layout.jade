@@ -2,11 +2,26 @@ doctype 5
 html
   head
     title= title
+    link(rel='stylesheet', href='/css/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    script(type='text/javascript')
+        window._initiators = "#{_initiators}".split(',')
+
     block head
 
   body
-    block topnav
-    block content
+    div.navbar.navbar-fixed-top.navbar-inverse
+      div.navbar-inner
+        div.container
+          a(data-collapse='collapse',data-target='.navbar-inverse-collapse').btn.btn-navbar
+          a.brand Collabistic
+          div.nav-collapse.collapse.navbar-inverse-collapse
+            block topnav-items
+    div.container#layout-container
+      block content
+
+    block footer
 
   script(data-main='js/main/app', src='js/lib/require-jquery.js')
   script(src='js/config.js')

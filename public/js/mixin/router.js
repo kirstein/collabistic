@@ -26,7 +26,7 @@ define([ 'module', 'collabistic', 'backbone', 'jquery' ], function(module, colla
     function startHistory() {
         if (Backbone.history){
             console.info('starting backgone router with properties:', JSON.stringify(config));
-            Backbone.history.start(config.history);
+            Backbone.history.start(config);
 
             // Trigger router start event
             app.trigger('router:start');

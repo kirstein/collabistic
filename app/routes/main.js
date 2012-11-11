@@ -16,7 +16,7 @@ exports.link = function() {
     this.initiators = collab.initiators;
 
 
-    this.app.get('/', function(req, res) {
+    this.app.get('/main', function(req, res) {
         res.render('index', {
             _initiators : uniqueArray(that.initiators),
             title       : config.title

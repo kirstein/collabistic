@@ -1,8 +1,35 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@margin-top: 50px;
+
+// Container for layout
+#layout-container {
+  margin-top: @margin-top;
 }
 
-a {
-  color: #00B7FF;
+// Login form
+#login-content {
+  @width: 600px;
+  @height: 250px;
+  position: absolute;
+  height: @height;
+  width: @width;
+  margin: -(@height/2 + @margin-top) 0 0 -@width/2;
+  top: 50%;
+  left: 50%;
+
+  #login-form {
+    ul#login-controls {
+      li {
+        &:not(last-child) {
+          margin-right: 5px;
+        }
+
+        float: left;
+      }
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      float: left;
+    }
+  }
 }
+
