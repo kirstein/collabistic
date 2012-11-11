@@ -1,5 +1,6 @@
 var libpath = process.env.COLLABISTIC_COV ? '../lib-cov' : '../lib',
     should  = require('should'),
+    fs      = require('fs'),
     path    = require('path');
 
 var utils   = require(path.join(libpath, 'utils.module'));
@@ -119,6 +120,35 @@ describe('utils.module', function() {
         it ('{name : true, location : true, manifest : true} should be true', function() {
             utils.isValid({ name : true, location: true, manifest : true})
                  .should.be.true;
+        });
+    });
+
+    describe('#writeInitiatorsSync', function() {
+        var file = path.join(__dirname, 'writeInitiatorsSync.js');
+        afterEach(function() {
+            if (fs.existsSync(file)) {
+                fs.unlinkSync(file);
+            }
+        });
+        it('should throw with no params', function() {
+            (function () {
+                utils.writeInitiatorsSync();
+            }).should.throw('Location undefined');
+        });
+        it('should throw when data is undefined', function() {
+            (function () {
+                utils.writeInitiatorsSync(__filename);
+            }).should.throw('Data undefined or invalid (must be an array)');
+        });
+        it('should throw when data is is not an array', function() {
+            (function () {
+                utils.writeInitiatorsSync(__filename, {});
+            }).should.throw('Data undefined or invalid (must be an array)');
+        });
+        it ('should write data', function() {
+            utils.writeInitiatorsSync(file, [ 'test', 'test', 'test' ]);
+
+            fs.existsSync(file).should.be.true;
         });
     });
 });

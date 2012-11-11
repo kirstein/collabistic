@@ -18,6 +18,7 @@ exports.public    = {
 };
 
 // Module management
+exports.initiatorsURI = path.join(exports.public.URI, 'js', 'initiators.json');
 exports.modulesURI = path.join(process.cwd(), "modules");
 exports.module     = {
     files         : [ 'index.js', 'manifest.json' ],

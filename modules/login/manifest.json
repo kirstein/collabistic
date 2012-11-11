@@ -1,6 +1,0 @@
-{
-    "assets"     : {
-        "dir"        : "./assets",
-        "initiators" : ["loginModule.js", "loginModule.js", "loginModule.js"]
-    }
-}

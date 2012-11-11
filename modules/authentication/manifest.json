@@ -1,0 +1,6 @@
+{
+    "assets"     : {
+        "dir"        : "./public",
+        "initiators" : ["/js/authModule.js", "/js/authModule.js", "/js/authModule.js", "/js/authModule.js","/js/authModule.js"]
+    }
+}

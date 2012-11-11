@@ -13,6 +13,7 @@ requirejs.config({
 
         // Plugins
         domReady   : 'lib/plugin/domReady',
+        text       : 'lib/plugin/text',
 
         // jQuery plugins
         'jquery.cookie' : 'lib/plugin/jquery-cookie'

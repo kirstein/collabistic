@@ -1,14 +1,25 @@
 // Boilerplate for module loader
-define(['collabistic'].concat(window._initiators), function(collabistic) {
+define(['text!' + window.config.initiators ], function(obj) {
 
+  function loadModule (module) {
+    loadingSuccess = function() {
+            console.info("Module:", module, "loaded!");
+        };
 
-    var modules = Array.prototype.slice.call(arguments);
+    loadingFail = function(err) {
+        var failedId = err.requireModules && err.requireModules[0];
+        console.error('Module loading failed:', failedId);
+    };
 
-    // Remove fist item
-    modules.shift();
+    require([module], loadingSuccess, loadingFail);
+  }
 
-    console.info("Modules loaded:", modules.length);
+  var list = JSON.parse(obj).initiators,
+      i;
 
-    // Return an array of loaded modules
-    return modules;
+  for (i = 0; i < list.length; i++) {
+    loadModule(list[i]);
+  }
+
+  return list;
 });

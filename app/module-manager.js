@@ -3,8 +3,10 @@ var path   = require('path'),
     utils  = require(path.join(process.cwd(), 'lib/utils.module'));
 
 exports.loadModules = function() {
-    var modules   = utils.getModulesSync(config.modulesURI, config.module.files);
+    var modules       = utils.getModulesSync(config.modulesURI, config.module.files),
+        loadedModules = utils.loadModules(modules);
 
-    // Global
-    loadedModules = utils.loadModules(modules);
+    utils.writeInitiatorsSync(config.initiatorsURI, global.collabistic.initiators);
+
+    return loadedModules;
 };

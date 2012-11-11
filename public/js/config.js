@@ -1,4 +1,5 @@
 window.config = {
+    initiators : 'initiators.json',
     mixins: [{
         // Logging levels:
         // 5. Error, someting really wrong, used data can be corrupt. Shit hit the fan.
