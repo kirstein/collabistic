@@ -6,12 +6,12 @@ var express  = require('express'),
     app      = express();
 
 // Add pushStateFilter
-var PushStateFilter = require(path.join(config.libURI, '/middleware/pushStateFilter'));
-app.use(new PushStateFilter(app, config.freepaths));
+var PushStateFilter = require(path.join(config.app.lib, '/middleware/pushStateFilter'));
+app.use(new PushStateFilter(app, config.filter.pushState.freepaths));
 
 app.configure(function() {
-  app.set('port', config.port);
-  app.set('views', config.viewsURI);
+  app.set('port', config.app.port);
+  app.set('views', config.app.views);
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -21,10 +21,10 @@ app.configure(function() {
   app.use(express.session());
   app.use(app.router);
   app.use(require('less-middleware')({
-    src: config.public.URI,
+    src: config.pub.dir,
     compress: true
   }));
-  app.use(express.static(config.public.URI));
+  app.use(express.static(config.pub.dir));
 
 });
 

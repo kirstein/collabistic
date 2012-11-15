@@ -9,11 +9,11 @@ define([ 'marionette', 'collabistic' ], function(Marionette, collabistic) {
 
         initialize : function() {
             this.on('all', function() {
-                console.debug('LoginModule > LoginRouter > event:', arguments);
+                console.debug('AuthModule > LoginRouter > event:', arguments);
             });
         },
         renderLogin : function() {
-            app.LoginModule.trigger('render:login');
+            app.AuthModule.trigger('render:login');
         }
     });
 });

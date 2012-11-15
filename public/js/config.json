@@ -1,0 +1,1 @@
+{"mixins":[{"path":"mixin/console","config":{"dateFormat":"[%H:%m:%s]","logLevel":1}},{"path":"mixin/pushState","config":{"cookieName":"redirect"}},{"path":"mixin/router","config":{"pushState":true,"trigger":true}}],"initiator":["modules/authentication/js/authModule"],"modules":["modules/authentication/js/authModule"]}

@@ -1,9 +1,7 @@
-define(['marionette'], function(marionette) {
-    var collabistic = {};
+define(['marionette'], function(Marionette) {
+  var app = new Marionette.Application();
 
-    // Make new application
-    collabistic.app    = new Marionette.Application();
-
-    return collabistic;
-
+  return {
+    app : app
+  };
 });

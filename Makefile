@@ -8,7 +8,7 @@ test: test-unit
 
 test-unit: test-env
 	echo "Running unit tests:"
-	$(MOCHA) -R $(R) -g $(G)
+	$(MOCHA) $(TESTS) -R $(R) -g $(G)
 
 coverage: lib-cov test-env
 	echo "Running coverage using all tests..."

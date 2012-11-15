@@ -32,7 +32,7 @@ describe('api', function() {
 
         describe ("#link([uri])", function() {
 
-            var moduleAssets = path.join(config.public.URI, config.public.linkDir);
+            var moduleAssets = path.join(config.pub.dir, config.module.link);
             afterEach(function() {
                 // If global assets folder for module assets does not exist, make a new one.
                 if (fs.existsSync(moduleAssets)) {
@@ -63,14 +63,14 @@ describe('api', function() {
                 }).should.not.throw();
 
                 // Validate that the folder was actually created
-                fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
+                fs.existsSync(path.join(config.pub.dir, config.module.link, 'mockModule'))
                   .should.be.true;
             });
         });
 
         describe ('#unlink()', function() {
             var moduleDir    = path.join(__dirname, '.mock', 'mockModule'),
-                moduleAssets = path.join(config.public.URI, config.public.linkDir);
+                moduleAssets = path.join(config.pub.dir, config.module.link);
 
 
             var assets = require(assetsPath)(mockModule);
@@ -86,7 +86,7 @@ describe('api', function() {
                     assets.unlink();
                 }).should.not.throw();
 
-                fs.existsSync(path.join(config.public.URI, config.public.linkDir, 'mockModule'))
+                fs.existsSync(path.join(config.pub.dir, config.module.link, 'mockModule'))
                   .should.be.false;
             });
         });

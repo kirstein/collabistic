@@ -1,27 +1,48 @@
-var path = require('path');
+var path      = require('path'),
+    config    = {};
 
-// Basic site settings
-exports.title   = "Default shit";
-exports.site    = "localhost";
-exports.port    = process.env.PORT || 3000;
-exports.baseURL = "http://#{exports.site}:#{exports.port}";
-
-// Base configuration
-exports.libURI    = path.join(process.cwd(), "lib");
-exports.appURI    = path.join(process.cwd(), "app");
-exports.routerURI = path.join(exports.appURI, "routes");
-exports.viewsURI  = path.join(exports.appURI, "views");
-exports.freepaths = [ '/','/js', '/modules', '/css', '/img' ],
-exports.public    = {
-    URI  : path.join(process.cwd(), "public"),
-    linkDir : 'modules'
+// Application settings
+config.app = {
+  dir   : path.join(process.cwd(), 'app'),
+  port  : process.env.PORT || 3000,
+  views : path.join(process.cwd(), 'app', 'views'),
+  lib   : path.join(process.cwd(), 'lib')
 };
 
-// Module management
-exports.initiatorsURI = path.join(exports.public.URI, 'js', 'initiators.json');
-exports.modulesURI = path.join(process.cwd(), "modules");
-exports.module     = {
-    files         : [ 'index.js', 'manifest.json' ],
-    manifest      : 'manifest.json',
-    ownProperties : [ 'name', 'location', 'manifest' ]
+// General router settings
+config.router = {
+  file : path.join(config.app.dir, 'routes')
 };
+
+// Filter configs
+config.filter = {
+  // pushstate modules settings
+  pushState : {
+    freepaths : [ '/','/js', '/modules', '/css', '/img' ]
+  }
+};
+
+// Public settings
+config.pub = {
+  dir     : path.join(process.cwd(), 'public'),
+  config  : path.join(process.cwd(), 'public/js/config.json')
+};
+
+// Module settings
+config.module = {
+  initiator  : 'modules',
+  dir        : path.join(process.cwd(), 'modules'),
+  // dir name that will be linked to public folder: public/<link>
+  link       : 'modules',
+  // list of files that a module must have
+  files      : [ 'index.js', 'manifest.json' ],
+  manifest   : {
+    filename   : 'manifest.json'
+  },
+  // Properties that define a module object
+  properties : [ 'name', 'location', 'manifest' ]
+};
+
+
+// Export modules
+module.exports = config;

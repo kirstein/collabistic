@@ -1,30 +1,35 @@
 requirejs.config({
     baseUrl: './js/',
     paths: {
-
         // Folder definitions
-        modules : '../modules',
-        lib     : 'lib',
+        'modules'       : '../modules',
+        'lib'           : 'lib',
 
         // Libraries
-        backbone   : 'lib/backbone-min',
-        underscore : 'lib/lodash-min',
-        marionette : 'lib/backbone-marionette-min',
+        'backbone'      : 'lib/backbone-min',
+        'underscore'    : 'lib/lodash-min',
+        'marionette'    : 'lib/backbone-marionette-min',
 
         // Plugins
-        domReady   : 'lib/plugin/domReady',
-        text       : 'lib/plugin/text',
+        'domReady'      : 'lib/plugin/domReady',
+        'text'          : 'lib/plugin/text',
+        'step'          : 'lib/plugin/step',
+
+        // App stuff
+        'app.config'    : 'main/buildConfig',
+        'app.mixins'    : 'main/loadMixins',
+        'app.modules'   : 'main/loadModules',
 
         // jQuery plugins
         'jquery.cookie' : 'lib/plugin/jquery-cookie'
     },
 
     shim : {
-        backbone    : {
+        'backbone'      : {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
         },
-        marionette  : {
+        'marionette'    : {
             deps : ['backbone'],
             exports: 'Backbone.Marionette'
         },
@@ -35,13 +40,28 @@ requirejs.config({
     }
 });
 
-define(['domReady','collabistic', 'main/mixins', 'main/modules'], function(domReady, collabistic) {
+// Step config. Makes sure that config and mixins are loaded in order.
+// Modules are loaded last, after everything else.
+require.config({
+    config: {
+        step: {
+            steps: [
+                ['app.config'],
+                ['app.mixins'],
+                ['app.modules']
+            ]
+        }
+    }
+});
+
+define(['domReady','collabistic','step!app.modules'], function(domReady, collabistic) {
     domReady(function(){
+        var app = collabistic.app;
 
-        var app    = collabistic.app;
-
-        // Start the app
+        // Start the marionette app
+        app.on('start', function() {
+            console.debug('Starting application');
+        });
         app.start();
-        console.debug('Starting application');
     });
 });

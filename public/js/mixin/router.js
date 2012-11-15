@@ -1,7 +1,8 @@
 define([ 'module', 'collabistic', 'backbone', 'jquery' ], function(module, collabistic, Backbone, $) {
+    console.debug('router mixin loaded:',module.config());
+
     var app    = collabistic.app,
         config = module.config();
-
 
     // Route anchor tags when data-rout is defined
     function route(e) {
@@ -24,18 +25,22 @@ define([ 'module', 'collabistic', 'backbone', 'jquery' ], function(module, colla
 
     // Start the backbone router
     function startHistory() {
-        if (Backbone.history){
-            console.info('starting backgone router with properties:', JSON.stringify(config));
-            Backbone.history.start(config);
+        // Bind all anchor tags to route
+        $('a').on('click', route);
 
-            // Trigger router start event
-            app.trigger('router:start');
-        }
+
+        console.info('starting backgone router with properties:', JSON.stringify(config));
+        Backbone.history.start(config);
+
+        // Trigger router start event
+        app.trigger('router:start');
     }
 
-     // Bind all anchor tags to route
-    $('a').on('click', route);
-
-    // Start history on 'start' event from application
-    app.on('start', startHistory);
+    if (Backbone.history) {
+        // Start if history is already available
+        startHistory();
+    } else {
+        // Start history on 'start' event from application
+        app.on('start', startHistory);
+    }
 });

@@ -1,4 +1,5 @@
 define(['module'], function(module) {
+    console.debug('console mixin loaded:',module.config());
 
     var level       = module.config().logLevel,
         fmt         = module.config().dateFormat,

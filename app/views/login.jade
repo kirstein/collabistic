@@ -3,12 +3,19 @@ extends layout
 block css
   link(rel='stylesheet', href='/modules/authentication/css/authentication.css')
 
+block topnav-items
+  ul.nav
+    li.active
+      a(href='/',data-route='true') Login
+    li
+      a(href='/register',data-route='true') Register
+
 block content
   div#login-content.row-fluid.row
     div.content
         div.row.well
             div.content
-              h2 Login...
+              h2 Login
               form#login-form.form-horizontal
                   div.control-group
                       label(for='email').control-label Email
