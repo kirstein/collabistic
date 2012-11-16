@@ -4,11 +4,13 @@ requirejs.config({
         // Folder definitions
         'modules'       : '../modules',
         'lib'           : 'lib',
+        'general'       : 'general',
 
         // Libraries
         'backbone'      : 'lib/backbone-min',
         'underscore'    : 'lib/lodash-min',
         'marionette'    : 'lib/backbone-marionette-min',
+        'spin'          : 'lib/spin.min',
 
         // Plugins
         'domReady'      : 'lib/plugin/domReady',
@@ -16,6 +18,7 @@ requirejs.config({
         'step'          : 'lib/plugin/step',
 
         // App stuff
+        'app.general'   : 'general/generalModule',
         'app.config'    : 'main/buildConfig',
         'app.mixins'    : 'main/loadMixins',
         'app.modules'   : 'main/loadModules',
@@ -48,20 +51,18 @@ require.config({
             steps: [
                 ['app.config'],
                 ['app.mixins'],
+                ['app.general'],
                 ['app.modules']
             ]
         }
     }
 });
 
-define(['domReady','collabistic','step!app.modules'], function(domReady, collabistic) {
+require(['domReady','collabistic','step!app.modules'], function(domReady, collabistic) {
+
     domReady(function(){
         var app = collabistic.app;
-
         // Start the marionette app
-        app.on('start', function() {
-            console.debug('Starting application');
-        });
         app.start();
     });
 });

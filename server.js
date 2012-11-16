@@ -10,8 +10,6 @@ global.collabistic         = { };
 global.collabistic.app     = app;
 global.collabistic.modules = manager.loadModules();
 
-require(config.router.file)();
-
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express app listening on port " + app.get('port'));
 });

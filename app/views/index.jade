@@ -1,10 +1,4 @@
 extends layout
 
-block content
-     h1= title
-     p Welcome to #{title}
-     a(href='/login', data-route='true') Login
-
-block footer
-    footer.footer Hmm
-        div.container
+block css
+  link(rel='stylesheet', href='/modules/authentication/css/authentication.css')

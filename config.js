@@ -3,6 +3,7 @@ var path      = require('path'),
 
 // Application settings
 config.app = {
+  title : 'Collabistic ALPHA-ALPHA!',
   dir   : path.join(process.cwd(), 'app'),
   port  : process.env.PORT || 3000,
   views : path.join(process.cwd(), 'app', 'views'),
@@ -10,9 +11,7 @@ config.app = {
 };
 
 // General router settings
-config.router = {
-  file : path.join(config.app.dir, 'routes')
-};
+config.router = path.join(config.app.dir, 'routes');
 
 // Filter configs
 config.filter = {

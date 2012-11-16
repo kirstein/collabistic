@@ -10,14 +10,15 @@ html
     block head
 
   body
-    div.navbar.navbar-fixed-top.navbar-inverse
+    section.navbar.navbar-fixed-top.navbar-inverse
       div.navbar-inner
         div.container
           a(data-collapse='collapse',data-target='.navbar-inverse-collapse').btn.btn-navbar
           a.brand Collabistic
           div.nav-collapse.collapse.navbar-inverse-collapse
             block topnav-items
-    div.container#layout-container
+
+    section.container#layout-container
       block content
 
     block footer

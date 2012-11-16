@@ -1,25 +1,36 @@
-define(['collabistic', './router/router'], function(collabistic, Router) {
+define(['collabistic',
+        './router/router',
+        './view/loginView'
+       ], function(collabistic, Router, LoginView) {
 
-    var app = collabistic.app;
+    return collabistic.app.module('AuthModule', function(AuthModule, MyApp, Backbone, Marionette) {
+        AuthModule.views = {};
 
-    return app.module('AuthModule', function(AuthModule, MyApp, Backbone, Marionette) {
-        // Initialize router
-        app.addInitializer(function() {
-            AuthModule.router = new Router();
+        // Add initializers
+        MyApp.addInitializer(function() {
+            AuthModule.router           = new Router();
+            AuthModule.views.loginView  = new LoginView();
         });
 
-        app.on('start', function() {
+        MyApp.on('start', function() {
             console.info('AuthModule loaded');
         });
 
         // Events
         AuthModule.on('all', function() {
-            console.debug('AuthModule > event:', arguments);
+            console.log('AuthModule > event:', arguments);
         });
 
         AuthModule.on('render:login', function() {
-            console.warn('should render login page');
-            console.error('error');
+            MyApp.trigger('render:content', AuthModule.views.loginView);
+        });
+
+        AuthModule.on('render:register', function() {
+
+        });
+
+        AuthModule.on('render:forgot', function() {
+
         });
     });
 });

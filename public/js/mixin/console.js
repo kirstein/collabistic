@@ -43,7 +43,7 @@ define(['module'], function(module) {
     }
 
     console.log = function() {
-        if(level < 1) {
+        if(level <= 1) {
             return _log('log', arguments);
         }
     };

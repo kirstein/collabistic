@@ -2,7 +2,7 @@ var fs     = require('fs'),
     log4js = require('log4js'),
     log    = log4js.getLogger(__filename);
 
-module.exports = function() {
+module.exports = function(app) {
     log.info('Adding main routes');
     fs.readdirSync(__dirname).forEach(function(file) {
         if (file === "index.js" || file.substr(file.lastIndexOf('.') + 1) !== 'js') {
@@ -10,6 +10,6 @@ module.exports = function() {
         }
 
         var name = file.substr(0, file.indexOf('.'));
-        require('./' + name).link();
+        require('./' + name)(app);
     });
 };

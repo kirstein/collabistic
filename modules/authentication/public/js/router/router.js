@@ -3,16 +3,28 @@ define([ 'marionette', 'collabistic' ], function(Marionette, collabistic) {
 
     return Marionette.AppRouter.extend({
         routes : {
-            'login/' : 'renderLogin',
-            'login'  : 'renderLogin'
+            '/'        : 'renderLogin',
+            ''         : 'renderLogin',
+            'register/'        : 'renderRegister',
+            'register'         : 'renderRegister',
+            'forgot-password'  : 'renderForgot',
+            'forgot-password/' : 'renderForgot'
         },
 
         initialize : function() {
             this.on('all', function() {
-                console.debug('AuthModule > LoginRouter > event:', arguments);
+                console.log('AuthModule > LoginRouter > event:', arguments);
             });
         },
-        renderLogin : function() {
+        renderRegister : function() {
+            app.AuthModule.trigger('render:register');
+        },
+
+        renderForgot   : function() {
+            app.AuthModule.trigger('render:forgot');
+        },
+
+        renderLogin    : function() {
             app.AuthModule.trigger('render:login');
         }
     });

@@ -8,7 +8,6 @@ LoginModule = function(api) {
 };
 
 LoginModule.prototype.init = function() {
-    this.routes     = require('./routes')(this.api);
     this.assets     = this.api.linkAssets();
     this.initiator  = this.api.addInitiator();
 };

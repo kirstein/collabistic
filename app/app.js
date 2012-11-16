@@ -9,6 +9,9 @@ var express  = require('express'),
 var PushStateFilter = require(path.join(config.app.lib, '/middleware/pushStateFilter'));
 app.use(new PushStateFilter(app, config.filter.pushState.freepaths));
 
+// Add router
+require(config.router)(app);
+
 app.configure(function() {
   app.set('port', config.app.port);
   app.set('views', config.app.views);

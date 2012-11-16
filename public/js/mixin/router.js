@@ -26,7 +26,7 @@ define([ 'module', 'collabistic', 'backbone', 'jquery' ], function(module, colla
     // Start the backbone router
     function startHistory() {
         // Bind all anchor tags to route
-        $('a').on('click', route);
+        $(document.body).delegate('a', 'click', route);
 
 
         console.info('starting backgone router with properties:', JSON.stringify(config));
