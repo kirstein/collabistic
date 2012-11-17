@@ -25,7 +25,7 @@ define(['collabistic',
       // spinner  = new Spin(spinConf);
 
   return Marionette.Layout.extend({
-    template: _.template("<section id='app-content'></section>"),
+    template: _.template(tpl),
     regions : {
       contentRegion : '#app-content'
     },

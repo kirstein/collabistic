@@ -24,10 +24,34 @@ describe('api', function() {
     });
 
     describe('API methods', function() {
-        it('should have property injectRoute', function() {
+        it('should have property injectRoutes', function() {
             require(apiLoc)(mockModule)
                 .should.be.an.instanceOf(Object)
                 .and.have.property('injectRoutes');
+        });
+
+        it('should have property injectResource', function() {
+            require(apiLoc)(mockModule)
+                .should.be.an.instanceOf(Object)
+                .and.have.property('injectResource');
+        });
+
+        it('should have property linkAssets', function() {
+            require(apiLoc)(mockModule)
+                .should.be.an.instanceOf(Object)
+                .and.have.property('linkAssets');
+        });
+
+        it('should have property unlinkAssets', function() {
+            require(apiLoc)(mockModule)
+                .should.be.an.instanceOf(Object)
+                .and.have.property('unlinkAssets');
+        });
+
+        it('should have property addInitiator', function() {
+            require(apiLoc)(mockModule)
+                .should.be.an.instanceOf(Object)
+                .and.have.property('addInitiator');
         });
     });
 });

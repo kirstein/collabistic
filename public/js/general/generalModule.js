@@ -11,7 +11,8 @@ define([ 'collabistic',
     });
 
     MyApp.addRegions({
-      content : '#layout-container'
+      content : '#layout-container',
+      topmenu : '#top-navbar'
     });
 
     MyApp.on('start', function() {

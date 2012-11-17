@@ -4,7 +4,6 @@ requirejs.config({
         // Folder definitions
         'modules'       : '../modules',
         'lib'           : 'lib',
-        'general'       : 'general',
 
         // Libraries
         'backbone'      : 'lib/backbone-min',

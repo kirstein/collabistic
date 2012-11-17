@@ -1,10 +1,18 @@
 <div id="auth-content">
     <div class="row-fluid row well content">
         <ul class="breadcrumb">
-          <li class="active">Login</li>
+          <li><a href="/" data-route="true">Login</a> <span class="divider">/</span></li>
+          <li class="active">Register user</li>
         </ul>
 
         <form class="form-horizontal" id="auth-form" name="auth-form">
+            <div class="control-group">
+                <label class="control-label" for="name">Full name</label>
+
+                <div class="controls">
+                    <input class="input-xlarge" id="name" placeholder="Full name" type="text">
+                </div>
+            </div>
             <div class="control-group">
                 <label class="control-label" for="email">Email</label>
 
@@ -22,16 +30,8 @@
             </div>
 
             <div class="control-group controls">
-                <ul id="auth-controls">
-                    <li>
-                        <a class="btn btn-link" data-route="true" href="/register">Register</a>
-                    </li>
-
-                    <li>
-                        <a class="btn btn-link" data-route="true" href="/forgot-password">Forgot password?</a>
-                    </li>
-
-                    <li><button class="btn">Login</button></li>
+                <ul id="auth-controls" style="margin-left:215px">
+                    <li><button class="btn">Register</button></li>
                 </ul>
             </div>
         </form>
